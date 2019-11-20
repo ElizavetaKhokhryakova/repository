@@ -11,28 +11,28 @@ using namespace std;
 
 struct node
 {
-	int key; //данные, размещенные на вершине дерева (в принципе любой тип)
-	int height;//высота поддерева с корнем *node	
-	node *left; //указатель на левого сына
-	node *right;//указатель на правого сына
+	int key; //Г¤Г Г­Г­Г»ГҐ, Г°Г Г§Г¬ГҐГ№ГҐГ­Г­Г»ГҐ Г­Г  ГўГҐГ°ГёГЁГ­ГҐ Г¤ГҐГ°ГҐГўГ  (Гў ГЇГ°ГЁГ­Г¶ГЁГЇГҐ Г«ГѕГЎГ®Г© ГІГЁГЇ)
+	int height;//ГўГ»Г±Г®ГІГ  ГЇГ®Г¤Г¤ГҐГ°ГҐГўГ  Г± ГЄГ®Г°Г­ГҐГ¬ *node	
+	node *left; //ГіГЄГ Г§Г ГІГҐГ«Гј Г­Г  Г«ГҐГўГ®ГЈГ® Г±Г»Г­Г 
+	node *right;//ГіГЄГ Г§Г ГІГҐГ«Гј Г­Г  ГЇГ°Г ГўГ®ГЈГ® Г±Г»Г­Г 
 	node(int k) { key = k; left = right = 0; height = 1; }
 	
 };
 
-//чтобы упростить основную прогу - учитывет возможность пустого указателя
+//Г·ГІГ®ГЎГ» ГіГЇГ°Г®Г±ГІГЁГІГј Г®Г±Г­Г®ГўГ­ГіГѕ ГЇГ°Г®ГЈГі - ГіГ·ГЁГІГ»ГўГҐГІ ГўГ®Г§Г¬Г®Г¦Г­Г®Г±ГІГј ГЇГіГ±ГІГ®ГЈГ® ГіГЄГ Г§Г ГІГҐГ«Гї
 int height(node* p)
 {
 	return p?p->height:0;
 }
 
-//возвращает разность высот левого и правого поддерева узла p
+//ГўГ®Г§ГўГ°Г Г№Г ГҐГІ Г°Г Г§Г­Г®Г±ГІГј ГўГ»Г±Г®ГІ Г«ГҐГўГ®ГЈГ® ГЁ ГЇГ°Г ГўГ®ГЈГ® ГЇГ®Г¤Г¤ГҐГ°ГҐГўГ  ГіГ§Г«Г  p
 int bfactor(node* p)
 {
 	return height(p->right)-height(p->left);
 }
 
 
-//вычисляет height узла p по высотам его левого и правого поддеревьев
+//ГўГ»Г·ГЁГ±Г«ГїГҐГІ height ГіГ§Г«Г  p ГЇГ® ГўГ»Г±Г®ГІГ Г¬ ГҐГЈГ® Г«ГҐГўГ®ГЈГ® ГЁ ГЇГ°Г ГўГ®ГЈГ® ГЇГ®Г¤Г¤ГҐГ°ГҐГўГјГҐГў
 void fixheight(node* p)
 {
 	int hl = height(p->left);
@@ -40,7 +40,7 @@ void fixheight(node* p)
 	p->height = (hl>hr?hl:hr)+1;
 }
 
-// правый поворот вокруг p - возвращает новую вершину поддерева
+// ГЇГ°Г ГўГ»Г© ГЇГ®ГўГ®Г°Г®ГІ ГўГ®ГЄГ°ГіГЈ p - ГўГ®Г§ГўГ°Г Г№Г ГҐГІ Г­Г®ГўГіГѕ ГўГҐГ°ГёГЁГ­Гі ГЇГ®Г¤Г¤ГҐГ°ГҐГўГ 
 node* rotateright(node* p) 
 {
 	node* q = p->left;
@@ -52,7 +52,7 @@ node* rotateright(node* p)
 }
 
 
-// левый поворот вокруг q 
+// Г«ГҐГўГ»Г© ГЇГ®ГўГ®Г°Г®ГІ ГўГ®ГЄГ°ГіГЈ q 
 node* rotateleft(node* q) 
 {
 	node* p = q->right;
@@ -64,7 +64,7 @@ node* rotateleft(node* q)
 }
 
 
-node* balance(node* p) // балансировка узла p
+node* balance(node* p) // ГЎГ Г«Г Г­Г±ГЁГ°Г®ГўГЄГ  ГіГ§Г«Г  p
 {
 	fixheight(p);
 	if( bfactor(p)==2 )
@@ -79,12 +79,12 @@ node* balance(node* p) // балансировка узла p
 			p->left = rotateleft(p->left);
 		return rotateright(p);
 	}
-	return p; // балансировка не нужна
+	return p; // ГЎГ Г«Г Г­Г±ГЁГ°Г®ГўГЄГ  Г­ГҐ Г­ГіГ¦Г­Г 
 }
 
 
 
-// вставка ключа k в дерево с корнем p
+// ГўГ±ГІГ ГўГЄГ  ГЄГ«ГѕГ·Г  k Гў Г¤ГҐГ°ГҐГўГ® Г± ГЄГ®Г°Г­ГҐГ¬ p
 node* insert(node* p, int k) 
 {
 	if( !p ) return new node(k);
@@ -98,7 +98,7 @@ node* insert(node* p, int k)
 
 
 
-//максимальный элемент
+//Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­Г»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ
 int tree_max(node *current_node)
 {
 	int sum = current_node->key;
@@ -108,7 +108,7 @@ int tree_max(node *current_node)
 
 
 
-//удаление дерева вместе с корнем
+//ГіГ¤Г Г«ГҐГ­ГЁГҐ Г¤ГҐГ°ГҐГўГ  ГўГ¬ГҐГ±ГІГҐ Г± ГЄГ®Г°Г­ГҐГ¬
 void del_tree(node *current_node)
 {
 	int lev1 = 0, lev2 = 0;
@@ -117,6 +117,38 @@ void del_tree(node *current_node)
 	free(current_node);
 }
 
+//ГіГ¤Г Г«ГҐГ­ГЁГҐ ГіГ§Г«Г  ГЇГ® Г§Г­Г Г·ГҐГ­ГЁГѕ ГЄГ«ГѕГ·Г  (Delkey Г±Г® ГўГ±ГЇГ®Г¬Г®ГЈГ ГІГҐГ«ГјГ­Г»Г¬ГЁ)
+node *SearchMin(node *x)
+{
+if (x->left) return SearchMin(x->left);
+else return x;
+}
+
+node *DeleteMin(node *x)
+{
+if (x->left==NULL) return x->right;
+x->left=DeleteMin(x->left);
+return balance(x);
+}
+
+node *Delkey(node *x, int k)
+{
+if (x==NULL) return NULL;
+if (k<x->key) x->left=Delkey(x->left, k);
+else if (k>x->key) x->right=Delkey(x->right, k);
+else
+{
+node *y=x->left;
+node *z=x->right;
+delete x;
+if (z==NULL) return y;
+node* min=SearchMin(z);
+min->right=DeleteMin(z);
+min->left=y;
+return balance(min);
+}
+return balance(x);
+}
 
 int main()
 {
@@ -131,14 +163,14 @@ int main()
 	else
 	{
 
-		while (!feof(fl)) //заполнение дерева с клавиатуры
+		while (!feof(fl)) //Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГҐ Г¤ГҐГ°ГҐГўГ  Г± ГЄГ«Г ГўГЁГ ГІГіГ°Г»
 		{
 			fscanf(fl, "%d", &dat);
 			p=insert(p, dat);
 		}
 
 	}
-
+	p=Delkey(p,2);
 	printf("\n %d", tree_max(p));
 	del_tree(p);
 
